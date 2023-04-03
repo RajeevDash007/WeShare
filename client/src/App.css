@@ -1,38 +1,189 @@
+@import url('https://fonts.googleapis.com/css2?family=Audiowide&display=swap');
 .App {
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+@property --rotate {
+  syntax: "<angle>";
+  initial-value: 132deg;
+  inherits: false;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+:root {
+  --card-height: 65vh;
+  --card-width: calc(var(--card-height) / 1.5);
+  --border-radius: 57% 43% 53% 47% / 46% 41% 59% 54%;
+  --width: 500px;
+  --height: 500px;
+  --clr-pebble: hsl(210, 24%, 41%);
+  --clr-border: hsl(210, 24%, 36%);
+  --cle-inset: hsl(210, 24%, 70%);
+  --mask-start: 30%;
+  --mask-end: 75%;
 }
 
-.App-header {
-  background-color: #282c34;
+
+body {
   min-height: 100vh;
+  background: #212534;
   display: flex;
-  flex-direction: column;
   align-items: center;
+  flex-direction: column;
+
+  padding-bottom: 2rem;
+  box-sizing: border-box;
+}
+
+
+.card {
+
+  background: #191c29;
+  width: var(--card-width);
+  height: var(--card-height);
+  padding: 3px;
+  position: relative;
+  border-radius: 6px;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  font-family: 'Audiowide', cursive;
+  display: flex;
+  font-size: 2rem;
+  color: rgb(234, 250, 88);
+  
 }
 
-.App-link {
-  color: #61dafb;
+.card::before {
+  content: "";
+  width: 104%;
+  height: 102%;
+  border-radius: 8px;
+  background-image: linear-gradient(
+    var(--rotate)
+    , #5ddcff, #3c67e3 43%, #4e00c2);
+    position: absolute;
+    z-index: -1;
+    top: -1%;
+    left: -2%;
+    animation: spin 2.5s linear infinite;
+    
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.card::after {
+  position: absolute;
+  content: "";
+  top: calc(var(--card-height) / 6);
+  left: 0;
+  right: 0;
+  z-index: -1;
+  height: 100%;
+  width: 100%;
+  margin: 0 auto;
+  transform: scale(0.8);
+  filter: blur(calc(var(--card-height) / 6));
+  background-image: linear-gradient(
+    var(--rotate)
+    , #5ddcff, #3c67e3 43%, #4e00c2);
+    opacity: 1;
+  transition: opacity .5s;
+  animation: spin 2.5s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    --rotate: 0deg;
   }
+  100% {
+    --rotate: 360deg;
+  }
+}
+
+
+
+
+.noise-bg {
+  position: absolute;
+  width: var(--width);
+  height: var(--height);
+  border-radius: var(--border-radius);
+  background-color: var(--clr-pebble);
+  top: 55%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  box-shadow: 15px 15px 60px rgba(0, 0, 0, 0.5),
+    inset 20px 20px 30px 2px var(--cle-inset);
+
+  animation: moveUp 2s ease-in-out;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  z-index: -10;
+}
+
+.noise-bg::after {
+  content: '';
+  width: var(--width);
+  height: var(--height);
+  position: absolute;
+  inset: 0;
+  border-radius: var(--border-radius);
+  -webkit-mask-image: linear-gradient(
+    to bottom right,
+    transparent var(--mask-start),
+    black var(--mask-end)
+  );
+  mask-image: linear-gradient(
+    to bottom right,
+    transparent var(--mask-start),
+    black var(--mask-end)
+  );
+  opacity: 0.95;
+  -webkit-filter: url(#noise-bg-fx) grayscale(100%);
+  filter: url(#noise-bg-fx) grayscale(100%);
+}
+
+.noise-bg::before {
+  content: '';
+  width: var(--width);
+  height: var(--height);
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: var(--border-radius);
+  -webkit-mask-image: linear-gradient(
+    to bottom right,
+    transparent 30%,
+    black 75%
+  );
+  mask-image: linear-gradient(to bottom right, transparent 0%, black 75%);
+  border: 2px solid var(--clr-border);
+  z-index: 10;
+}
+
+@keyframes moveUp {
   to {
-    transform: rotate(360deg);
+    transform: translate(-50%, -50%) translateY(-50px);
+  }
+}
+
+.shadow {
+  width: 500px;
+  height: 100px;
+  background-color: black;
+  position: absolute;
+  top: 80%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  filter: blur(45px);
+  border-radius: 50%;
+  z-index: 1;
+  opacity: 0.6;
+  animation: fadeOut 2s ease-in-out;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+@keyframes fadeOut {
+  to {
+    transform: translate(-50%, -50%) scaleX(1.1);
+    opacity: 0.3;
   }
 }
