@@ -34,15 +34,17 @@ body {
   box-sizing: border-box;
 }
 
-
-.card {
-
+.card{
   background: #191c29;
   width: var(--card-width);
   height: var(--card-height);
   padding: 3px;
   position: relative;
   border-radius: 6px;
+}
+.heading{
+
+ 
   justify-content: center;
   font-family: 'Audiowide', cursive;
   display: flex;
@@ -51,7 +53,7 @@ body {
   
 }
 
-.card::before {
+.heading::before {
   content: "";
   width: 104%;
   height: 102%;
@@ -67,7 +69,7 @@ body {
     
 }
 
-.card::after {
+.heading::after {
   position: absolute;
   content: "";
   top: calc(var(--card-height) / 6);
@@ -96,7 +98,14 @@ body {
   }
 }
 
-
+.UploadWrapper{
+  font-family: cursive;
+  color:white;
+  font-size: 20px;
+  width: 100%;
+  text-align: center;
+  justify-content: center;
+}
 
 
 .noise-bg {

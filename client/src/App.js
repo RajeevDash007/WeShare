@@ -13,8 +13,14 @@ function App() {
             </filter>
           </svg>
       <div class="card">
+        <div className="heading">
         WeShare
+        </div>
+        <div className="UploadWrapper">
+            Share your file Online
+        </div>
       </div>
+      
     </div>
   );
 }
