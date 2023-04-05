@@ -30,6 +30,7 @@ function App() {
         </div>
         <div className="uploadButton">
           <button onClick={()=> onUploadClick()}>Upload</button>
+          
           <input type="file"
             ref={fileInputRef}
             style={{display: 'none'}}
