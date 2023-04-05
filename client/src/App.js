@@ -1,13 +1,25 @@
-import {useRef,useState} from 'react';
+import {useRef,useState,useEffect} from 'react';
 import './App.css';
 
 function App() {
   const fileInputRef = useRef();
+  const [file, setFile] = useState('');
   const onUploadClick = () =>{
     fileInputRef.current.click();
   }
+  useEffect(()=>{
+    const getImage = () =>{
+      if(file){
+        const data = new FormData();
+        data.append("name",file.name);
+        data.append("file",file);
 
-  const [file, setFile] = useState('');
+        uploadFile();
+      }
+    }
+    getImage();
+  },[file])
+  
 
   console.log(file);
 
