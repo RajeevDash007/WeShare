@@ -4,6 +4,7 @@ import {uploadFile} from './services/api.js';
 function App() {
   const fileInputRef = useRef();
   const [file, setFile] = useState('');
+  const [result,setResult] = useState('');
   const onUploadClick = () =>{
     fileInputRef.current.click();
   }
@@ -15,6 +16,7 @@ function App() {
         data.append("file",file);
 
        let response = await uploadFile(data);
+       setResult(response.path);
       }
     }
     getImage();
@@ -48,10 +50,14 @@ function App() {
             style={{display: 'none'}}
             onChange={(e) => setFile(e.target.files[0])}
           />
-        </div>
+          
+        </div>  
       </div>
-      
+      <div className='downloadLink'>
+        <a href={result}>{result}</a>
+      </div>
     </div>
+    
   );
 }
 

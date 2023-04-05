@@ -13,3 +13,17 @@ export const uploadImage = async(request,response) => {
     response.status(500).json({error: error.message});
    }
 }
+
+export const downloadImage = async(request,response)=>{
+    try{
+       const file =  await File.findById(request.params.fileId);
+       file.downloadContent++;
+       await file.save();
+
+       response.download(file.path,file.name);
+    }
+    catch(error){
+        console.error(error.message);
+        return response.status(500).json({error: error.message});
+    }
+}
