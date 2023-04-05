@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'https://wesharefiles.netlify.app';
+const API_URL = 'https://weshare-7i13.onrender.com';
 
 export const uploadFile= async (data)=>{
     try{
