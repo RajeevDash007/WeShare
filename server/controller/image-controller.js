@@ -1,3 +1,11 @@
 export const uploadImage = (request,response) => {
-    return response.status(200).json({msg: 'Hello'});
+    const fileObj = {
+        path: request.file.path,
+        name: request.file.originalname
+    }
+   try {
+    
+   } catch (error) {
+    console.error(error.message);
+   }
 }
